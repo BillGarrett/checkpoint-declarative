@@ -24,11 +24,22 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
     }
     stage('Deploy') {
       steps {
+        options() {
+          timeout(time: 10, unit: 'SECONDS')
+        }
+        
         sh 'echo Ready to deploy'
-        input 'Press OK to deploy'
+        input 'Proceed with deployment?'
         unstash 'artifact.txt'
         sh 'cat artifact.txt'
       }
     }
+  }
+  post {
+    aborted {
+      echo 'Timed out waiting for approval'
+      
+    }
+    
   }
 }
