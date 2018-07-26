@@ -25,6 +25,7 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
     stage('Deploy') {
       steps {
         sh 'echo Ready to deploy'
+        input 'Press OK to deploy'
         unstash 'artifact.txt'
         sh 'cat artifact.txt'
       }
