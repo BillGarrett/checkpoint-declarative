@@ -5,6 +5,7 @@ pipeline {
       steps {
         sh '''echo Building
 echo Build number $BUILD_NUMBER > artifact.txt'''
+        stash 'artifact.txt'
       }
     }
     stage('Test') {
@@ -23,8 +24,9 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
     }
     stage('Deploy') {
       steps {
-        sh '''echo Ready to deploy
-cat artifact.txt'''
+        sh 'echo Ready to deploy'
+        unstash 'artifact.txt'
+        sh 'cat artifact.txt'
       }
     }
   }
