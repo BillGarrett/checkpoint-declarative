@@ -4,7 +4,7 @@ pipeline {
     stage('Build') {
       steps {
         sh '''echo Building
-env'''
+echo Build number $BUILD_NUMBER > artifact.txt'''
       }
     }
     stage('Test') {
@@ -23,7 +23,8 @@ env'''
     }
     stage('Deploy') {
       steps {
-        sh 'echo Ready to deploy'
+        sh '''echo Ready to deploy
+cat artifact.txt'''
       }
     }
   }
