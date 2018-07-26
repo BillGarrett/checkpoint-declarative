@@ -24,7 +24,7 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
     }
     stage('Deploy') {
       options {
-        timeout(time: 5, unit: 'SECONDS')
+        timeout(time: 10, unit: 'SECONDS')
       }
       steps {
         checkpoint 'deploy'
