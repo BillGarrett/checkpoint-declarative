@@ -23,13 +23,13 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
       }
     }
     stage('Deploy') {
+      options {
+        timeout(time: 5, unit: 'SECONDS')
+      }
+      input {
+        message 'Proceed with deployment?'
+      }
       steps {
-        options() {
-          timeout(time: 10, unit: 'SECONDS')
-        }
-        
-        sh 'echo Ready to deploy'
-        input 'Proceed with deployment?'
         unstash 'artifact.txt'
         sh 'cat artifact.txt'
       }
