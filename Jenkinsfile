@@ -26,10 +26,9 @@ echo Build number $BUILD_NUMBER > artifact.txt'''
       options {
         timeout(time: 5, unit: 'SECONDS')
       }
-      input {
-        message 'Proceed with deployment?'
-      }
       steps {
+        checkpoint 'deploy'
+        input 'Proceed with deployment?'
         unstash 'artifact.txt'
         sh 'cat artifact.txt'
       }
